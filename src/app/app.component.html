@@ -1,3 +1,30 @@
-<h1>
-  {{title}}
-</h1>
+<section class="managementapp">
+  <header class="header">
+    <h1>Property</h1>
+    <input class="new-property" placeholder="Ввведите имя" autofocus="" [(ngModel)]="newProperty.propertyName">
+    <input class="new-property" placeholder="Ввведите значение" autofocus="" [(ngModel)]="newProperty.propertyValue">
+    <input class="new-property" placeholder="Ввведите имя приложения" autofocus="" [(ngModel)]="newProperty.application">
+    <input class="new-property" placeholder="Ввведите профиль" autofocus="" [(ngModel)]="newProperty.profile">
+    <button class="new-property" (click)="addProperty()">Добавить</button>
+  </header>
+
+
+  <section class="main" *ngIf="managementDataService.management.length > 0">
+    <ul class="property-list">
+      <li *ngFor="let property of managementDataService.management">
+        <div class="view">
+           <label>{{property.propertyName}}</label>
+           <label>{{property.propertyValue}}</label>
+
+        </div>
+      </li>
+    </ul>
+  </section>
+
+
+  <button class="get-property" (click)="Propertys()">PROP</button>
+
+  <footer class="footer" *ngIf="management.length > 0">
+    <span class="todo-count"><strong>{{management.length}}</strong> {{management.length == 1 ? 'item' : 'items'}} left</span>
+  </footer>
+</section>
