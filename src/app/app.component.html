@@ -9,6 +9,18 @@
   </header>
 
 
+  <GridLayout>
+    <ListView [items]="stocks" class="list-group">
+      <Template let-stock="item">
+        <GridLayout rows="auto, auto" columns="*, auto" class="list-group-item">
+          <Label class="h2" text="{{ stock.Symbol }}" row="0" col="0"></Label>
+          <Label text="{{ stock.Name }}" row="1" col="0"></Label>
+          <Label text="{{ stock.LastPrice }}" row="0" col="1"></Label>
+        </GridLayout>
+      </Template>
+    </ListView>
+  </GridLayout>
+
   <section class="main" *ngIf="managementDataService.management.length > 0">
     <ul class="property-list">
       <li *ngFor="let property of managementDataService.management">

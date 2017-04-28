@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Http } from  '@angular/http';
 import {ManagementDataService} from  './management-data.service';
 import {Property} from  './property'
+import "rxjs/Rx";
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ export class AppComponent {
 
   newProperty: Property = new Property();
 
-  constructor(private managementDataService: ManagementDataService){
+  constructor(private http: Http, private managementDataService: ManagementDataService){
 
   }
   addProperty(){
@@ -31,6 +33,17 @@ export class AppComponent {
 
   Propertys(): Property[]{
     return this.managementDataService.getAllPropertys();
+  }
+
+  public getQuote(app: string, profile: string) {
+    this.http.get("http://localhost:8888/properties/get/"+app+"/"+profile)
+      .map(result => JSON.parse(result.json()))
+      .do(result => console.log("RESULT: ", JSON.stringify(result)))
+      .subscribe(result => {
+          this.managementDataService.management.push(result);
+      }, error => {
+        console.log("ERROR: ", error);
+      });
   }
 
 }
